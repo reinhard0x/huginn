@@ -6,7 +6,6 @@
 **System**: Huginn — Primary offensive workstation (Kali Linux)  
 **Companion**: Muninn — Mobile / field system  
 **Persona**: Reinhard — Maverick Security LLC  
-**Location**: Eirdom Office, Austin, Minnesota
 
 ---
 
@@ -27,7 +26,7 @@
 
 ```bash
 # 1. Clone this repo
-git clone git@github.com:tyler-maverick-higgins/huginn.git ~/huginn
+git clone git@github.com:reinhard0x/huginn.git ~/huginn
 cd ~/huginn
 
 # 2. Run full setup (installs packages, OMZ, P10k, tools, configs, hardens system)
@@ -40,16 +39,6 @@ p10k configure
 # 4. Install VSCode extensions
 bash vscode/install-extensions.sh
 ```
-
----
-
-## Handles
-
-| Context | Handle |
-|---|---|
-| Professional | Reinhard |
-| CTF / Bug Bounty | r3inhard |
-| GitHub | tyler-maverick-higgins |
 
 ---
 
