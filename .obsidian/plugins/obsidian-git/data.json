@@ -1,0 +1,22 @@
+{
+  "commitMessage": "notes: {{date}} — {{hostname}}",
+  "commitDateFormat": "YYYY-MM-DD HH:mm",
+  "autoSaveInterval": 0,
+  "autoPushInterval": 0,
+  "autoPullInterval": 10,
+  "autoPullOnBoot": true,
+  "disablePush": false,
+  "pullBeforePush": true,
+  "disablePopups": false,
+  "listChangedFilesInMessageBody": true,
+  "showStatusBar": true,
+  "updateSubmodules": false,
+  "syncMethod": "merge",
+  "customMessageOnAutoCommit": false,
+  "autoCommitMessage": "notes: {{date}} auto-sync",
+  "gitPath": "",
+  "isEmptyCommitAllowed": false,
+  "lineAuthor": {
+    "show": false
+  }
+}

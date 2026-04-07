@@ -1,0 +1,155 @@
+/* ============================================================
+   Reinhard — Obsidian CSS Snippet
+   Applies Huginn terminal palette to Obsidian UI
+   Background: #0D0D0D | Accent: #B08D57 (brass/gold)
+   ============================================================ */
+
+:root {
+  /* Core palette */
+  --color-accent:               #B08D57;
+  --color-accent-1:             #C9A76A;
+  --color-accent-2:             #8A6D3F;
+  --color-accent-3:             #6B5230;
+
+  /* Backgrounds */
+  --background-primary:         #0D0D0D;
+  --background-primary-alt:     #111110;
+  --background-secondary:       #1A1A17;
+  --background-secondary-alt:   #141412;
+  --background-modifier-border: #2A2A27;
+  --background-modifier-hover:  #1E1E1B;
+  --background-modifier-active-hover: #242420;
+  --background-modifier-error:  #5C1F1F;
+  --background-modifier-success:#1F3D1F;
+
+  /* Text */
+  --text-normal:                #CDCCCA;
+  --text-muted:                 #9A9A97;
+  --text-faint:                 #666663;
+  --text-on-accent:             #0D0D0D;
+  --text-error:                 #C0504A;
+  --text-success:               #5A9960;
+  --text-selection:             rgba(176, 141, 87, 0.25);
+
+  /* Interactive */
+  --interactive-accent:         #B08D57;
+  --interactive-accent-hover:   #C9A76A;
+  --interactive-normal:         #1A1A17;
+  --interactive-hover:          #242420;
+  --interactive-active:         #2C2C28;
+
+  /* Code blocks */
+  --code-background:            #111110;
+  --code-normal:                #CDCCCA;
+  --code-comment:               #666663;
+  --code-function:              #B08D57;
+  --code-important:             #C0504A;
+  --code-keyword:               #4A7EA8;
+  --code-operator:              #3D8C8C;
+  --code-property:              #5A9960;
+  --code-string:                #5A9960;
+  --code-tag:                   #C0504A;
+  --code-value:                 #C9A76A;
+
+  /* Headings */
+  --h1-color:                   #C9A76A;
+  --h2-color:                   #B08D57;
+  --h3-color:                   #CDCCCA;
+  --h4-color:                   #9A9A97;
+  --h5-color:                   #9A9A97;
+  --h6-color:                   #666663;
+
+  /* Links */
+  --link-color:                 #B08D57;
+  --link-color-hover:           #C9A76A;
+  --link-unresolved-color:      #666663;
+
+  /* Tags */
+  --tag-color:                  #B08D57;
+  --tag-background:             rgba(176, 141, 87, 0.12);
+  --tag-background-hover:       rgba(176, 141, 87, 0.22);
+
+  /* Callouts */
+  --callout-color:              176, 141, 87;
+
+  /* Borders & dividers */
+  --divider-color:              #2A2A27;
+  --tab-outline-color:          #2A2A27;
+
+  /* Scrollbar */
+  --scrollbar-thumb-bg:         #2A2A27;
+  --scrollbar-active-thumb-bg:  #3D3C38;
+}
+
+/* Status bar */
+.status-bar {
+  background-color: #111110;
+  border-top: 1px solid #2A2A27;
+  color: #666663;
+}
+
+/* Active note tab */
+.workspace-tab-header.is-active {
+  background-color: #0D0D0D;
+  border-bottom-color: #B08D57;
+}
+
+/* Sidebar heading */
+.nav-header {
+  color: #B08D57;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+
+/* File tree active item */
+.nav-file-title.is-active,
+.nav-folder-title.is-active {
+  background-color: rgba(176, 141, 87, 0.12);
+  color: #C9A76A;
+}
+
+/* Inline code */
+.cm-s-obsidian .cm-inline-code {
+  background-color: #111110;
+  color: #C9A76A;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* Table styling */
+.markdown-rendered table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.markdown-rendered th {
+  background-color: #1A1A17;
+  color: #B08D57;
+  border: 1px solid #2A2A27;
+  padding: 6px 10px;
+}
+
+.markdown-rendered td {
+  border: 1px solid #2A2A27;
+  padding: 5px 10px;
+  color: #CDCCCA;
+}
+
+.markdown-rendered tr:nth-child(even) td {
+  background-color: #111110;
+}
+
+/* Checkbox styling */
+.task-list-item-checkbox {
+  accent-color: #B08D57;
+}
+
+/* Graph view */
+.graph-view.color-fill         { color: #B08D57; }
+.graph-view.color-fill-unresolved { color: #3D3C38; }
+.graph-view.color-line         { color: #2A2A27; }
+.graph-view.color-line-highlighted { color: #B08D57; }
+.graph-view.color-arrow        { color: #B08D57; }
+.graph-view.color-fill-focused { color: #C9A76A; }

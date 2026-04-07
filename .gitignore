@@ -61,3 +61,15 @@ Thumbs.db
 # === Editor ===
 .idea/
 *.iml
+
+# === Obsidian ===
+# Keep: .obsidian/app.json, appearance.json, core-plugins.json,
+#        community-plugins.json, templates.json, plugins/*/data.json,
+#        snippets/*.css
+# Exclude: runtime/workspace state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/graph.json
+.trash/
+notes/**/*.canvas
