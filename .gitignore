@@ -1,0 +1,63 @@
+# ============================================================
+# .gitignore — huginn repo
+# Never commit operational data, credentials, or local paths
+# ============================================================
+
+# === Ops data — NEVER commit ===
+ops/*
+!ops/.gitkeep
+
+# === Credentials & keys ===
+*.pem
+*.key
+*.p12
+*.pfx
+*.ovpn
+*.conf
+id_rsa
+id_ed25519
+*.asc
+secrets/
+creds/
+loot/
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.so
+.venv/
+venv/
+env/
+
+# === Shell / Zsh ===
+*.zwc
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# === Logs & temp ===
+*.log
+*.tmp
+*.bak
+*.bak.*
+
+# === Archives ===
+*.tar.gz
+*.zip
+*.7z
+
+# === VSCode workspace files (local machine-specific) ===
+.vscode/launch.json
+.vscode/*.log
+
+# === Editor ===
+.idea/
+*.iml

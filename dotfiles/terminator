@@ -1,0 +1,95 @@
+[global_config]
+  enabled_plugins = 
+  focus = system
+  suppress_multiple_term_dialog = True
+  title_font = MesloLGS NF 11
+  title_hide_sizetext = True
+  title_use_system_font = False
+  title_transmit_fg_color = "#0D0D0D"
+  title_transmit_bg_color = "#B08D57"
+  title_receive_fg_color = "#0D0D0D"
+  title_receive_bg_color = "#3D8C8C"
+  title_inactive_fg_color = "#666666"
+  title_inactive_bg_color = "#1A1A17"
+
+[keybindings]
+
+[profiles]
+  [[reinhard]]
+    # === Colors ===
+    background_color = "#0D0D0D"
+    background_type = solid
+    foreground_color = "#CDCCCA"
+    # 16-color ANSI palette (xterm order):
+    # Normal:  Black  Red     Green   Yellow  Blue    Magenta Cyan    White
+    # Bright:  BBlack BRed    BGreen  BYellow BBlue   BMagenta BCyan  BWhite
+    palette = "#1A1A17:#C0504A:#5A9960:#B08D57:#4A7EA8:#7A5C8B:#3D8C8C:#C8C4BC:#3D3C38:#D06B65:#72BB78:#C9A76A:#6A9FCC:#9B7ABB:#4EAAAA:#E8E4DD"
+    # === Cursor ===
+    cursor_blink = True
+    cursor_color = "#B08D57"
+    cursor_color_fg = False
+    cursor_shape = block
+    # === Font ===
+    # MesloLGS NF is the Powerlevel10k-recommended Nerd Font.
+    # Install via reinhard_setup.sh --init before opening Terminator.
+    font = MesloLGS NF 12
+    use_system_font = False
+    # === Scrollback ===
+    scrollback_infinite = True
+    scroll_on_keystroke = True
+    scroll_on_output = False
+    # === Behavior ===
+    use_theme_colors = False
+    show_titlebar = True
+    copy_on_selection = True
+    audible_bell = False
+    visible_bell = False
+    urgent_bell = False
+    login_shell = False
+    word_chars = "-A-Za-z0-9,./?%&#:_@"
+
+[layouts]
+  # === default ===
+  # Single-pane workspace. Open with: terminator -l default
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+      title = Huginn
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = reinhard
+
+  # === operator ===
+  # Three-pane layout: large main terminal on top (~65%), two
+  # side-by-side terminals at bottom (~35%). Ideal for: main shell
+  # up top, listener + log tail or second target down below.
+  # Open with: terminator -l operator
+  [[operator]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+      title = Huginn — Operator
+    [[[vpaned0]]]
+      type = VPaned
+      parent = window0
+      ratio = 0.6500000000000000
+    [[[terminal_main]]]
+      type = Terminal
+      parent = vpaned0
+      profile = reinhard
+    [[[hpaned0]]]
+      type = HPaned
+      parent = vpaned0
+      ratio = 0.5000000000000000
+    [[[terminal_bl]]]
+      type = Terminal
+      parent = hpaned0
+      profile = reinhard
+    [[[terminal_br]]]
+      type = Terminal
+      parent = hpaned0
+      profile = reinhard
+
+[plugins]

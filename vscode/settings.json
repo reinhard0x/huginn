@@ -1,0 +1,158 @@
+{
+    // ── Appearance ────────────────────────────────────────────
+    "workbench.colorTheme": "Gruvbox Material Dark Hard",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.tree.indent": 16,
+    "workbench.startupEditor": "none",
+    "workbench.editor.wrapTabs": true,
+
+    // ── Font ──────────────────────────────────────────────────
+    "editor.fontFamily": "'MesloLGS NF', 'Fira Code', 'Cascadia Code', monospace",
+    "editor.fontSize": 13,
+    "editor.lineHeight": 1.6,
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "'MesloLGS NF'",
+    "terminal.integrated.fontSize": 13,
+
+    // ── Editor ────────────────────────────────────────────────
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+    "editor.wordWrap": "off",
+    "editor.rulers": [100],
+    "editor.renderWhitespace": "boundary",
+    "editor.formatOnSave": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.minimap.enabled": false,
+    "editor.scrollBeyondLastLine": false,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorStyle": "block",
+    "editor.smoothScrolling": true,
+    "editor.linkedEditing": true,
+
+    // ── Files ─────────────────────────────────────────────────
+    "files.autoSave": "onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.DS_Store": true
+    },
+
+    // ── Terminal ──────────────────────────────────────────────
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+        "zsh": { "path": "/bin/zsh", "args": ["-l"], "icon": "terminal-linux" }
+    },
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.rightClickBehavior": "paste",
+
+    // ── Git ───────────────────────────────────────────────────
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+
+    // ── Python ───────────────────────────────────────────────
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.tabSize": 4
+    },
+
+    // ── Go ───────────────────────────────────────────────────
+    "go.useLanguageServer": true,
+    "go.formatTool": "goimports",
+    "[go]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": false
+    },
+
+    // ── Shell ─────────────────────────────────────────────────
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.tabSize": 4
+    },
+
+    // ── Markdown ──────────────────────────────────────────────
+    "markdown.preview.breaks": true,
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+
+    // ── YAML ─────────────────────────────────────────────────
+    "[yaml]": { "editor.tabSize": 2, "editor.insertSpaces": true },
+
+    // ── Error Lens ───────────────────────────────────────────
+    "errorLens.enabled": true,
+    "errorLens.followCursor": "allLines",
+
+    // ── Better Comments ──────────────────────────────────────
+    "better-comments.tags": [
+        { "tag": "!",    "color": "#C0504A", "strikethrough": false, "bold": true,  "italic": false, "backgroundColor": "transparent" },
+        { "tag": "?",    "color": "#3D8C8C", "strikethrough": false, "bold": false, "italic": false, "backgroundColor": "transparent" },
+        { "tag": "//",   "color": "#4A4A46", "strikethrough": true,  "bold": false, "italic": false, "backgroundColor": "transparent" },
+        { "tag": "TODO", "color": "#B08D57", "strikethrough": false, "bold": true,  "italic": false, "backgroundColor": "transparent" },
+        { "tag": "*",    "color": "#72BB78", "strikethrough": false, "bold": true,  "italic": false, "backgroundColor": "transparent" }
+    ],
+
+    // ── Todo Tree ────────────────────────────────────────────
+    "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "NOTE", "OPSEC"],
+    "todo-tree.highlights.defaultHighlight": {
+        "icon": "alert",
+        "type": "text",
+        "foreground": "#0D0D0D",
+        "background": "#B08D57",
+        "iconColour": "#B08D57"
+    },
+
+    // ── Reinhard Color Overrides ──────────────────────────────
+    "workbench.colorCustomizations": {
+        "[Gruvbox Material Dark Hard]": {
+            "editor.background":                 "#0D0D0D",
+            "terminal.background":               "#0D0D0D",
+            "activityBar.background":            "#0D0D0D",
+            "sideBar.background":                "#0F0F0F",
+            "statusBar.background":              "#1A1A17",
+            "statusBarItem.remoteBackground":    "#B08D57",
+            "statusBarItem.remoteForeground":    "#0D0D0D",
+            "tab.activeBackground":              "#1A1A17",
+            "tab.inactiveBackground":            "#0D0D0D",
+            "titleBar.activeBackground":         "#1A1A17",
+            "titleBar.activeForeground":         "#CDCCCA",
+            "editorCursor.foreground":           "#B08D57",
+            "editorLineNumber.foreground":       "#3D3C38",
+            "editorLineNumber.activeForeground": "#B08D57"
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Gruvbox Material Dark Hard]": {
+            "textMateRules": [
+                { "scope": ["keyword", "keyword.control"],  "settings": { "foreground": "#B08D57" } },
+                { "scope": ["string", "string.quoted"],     "settings": { "foreground": "#72BB78" } },
+                { "scope": ["comment"],                     "settings": { "foreground": "#4A4A46", "fontStyle": "italic" } }
+            ]
+        }
+    },
+
+    // ── Telemetry off ─────────────────────────────────────────
+    "telemetry.telemetryLevel": "off",
+    "redhat.telemetry.enabled": false,
+
+    // ── GitHub Copilot (disable in shell scripts) ─────────────
+    "github.copilot.enable": {
+        "*":           true,
+        "shellscript": false,
+        "markdown":    true,
+        "python":      true,
+        "go":          true
+    }
+}

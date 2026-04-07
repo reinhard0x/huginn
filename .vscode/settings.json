@@ -1,0 +1,20 @@
+{
+    "editor.fontFamily": "'MesloLGS NF', 'Fira Code', 'Cascadia Code', monospace",
+    "editor.fontSize": 13,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format",
+        "editor.tabSize": 4
+    },
+    "[markdown]": {
+        "editor.wordWrap": "on"
+    },
+    "[yaml]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    }
+}

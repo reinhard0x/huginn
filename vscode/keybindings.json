@@ -1,0 +1,20 @@
+[
+    // ── Terminal ──────────────────────────────────────────────
+    { "key": "ctrl+`",       "command": "workbench.action.terminal.toggleTerminal" },
+    { "key": "ctrl+shift+`", "command": "workbench.action.terminal.new" },
+    { "key": "ctrl+alt+t",   "command": "workbench.action.terminal.newWithCwd" },
+
+    // ── Sidebar & Panel ───────────────────────────────────────
+    { "key": "ctrl+b",       "command": "workbench.action.toggleSidebarVisibility" },
+    { "key": "ctrl+j",       "command": "workbench.action.togglePanel" },
+    { "key": "ctrl+shift+e", "command": "workbench.view.explorer" },
+    { "key": "ctrl+shift+g", "command": "workbench.view.scm" },
+    { "key": "ctrl+shift+x", "command": "workbench.view.extensions" },
+
+    // ── Markdown ──────────────────────────────────────────────
+    { "key": "ctrl+shift+v", "command": "markdown.showPreviewToSide",
+      "when": "editorLangId == markdown" },
+
+    // ── Todo Tree ─────────────────────────────────────────────
+    { "key": "ctrl+shift+t", "command": "todo-tree.showFlatView" }
+]

@@ -1,0 +1,71 @@
+# ============================================================
+# install_list.txt — Huginn Package List
+# Persona: Reinhard — Maverick Security LLC
+# System: Huginn (Kali Linux primary workstation)
+# Managed by: reinhard_setup.sh
+#
+# Format: one package per line
+# Lines starting with # are comments and are ignored by the installer
+#
+# NOTE: neo4j is NOT listed here — it requires a dedicated apt
+# repository and is handled separately in reinhard_setup.sh.
+# ============================================================
+
+# === Shell & Core Utilities ===
+zsh
+git
+vim
+curl
+tmux
+xclip
+socat
+ncat
+
+# === System Monitoring ===
+# btop replaces bpytop — actively maintained, richer TUI
+btop
+
+# === Build & Development ===
+build-essential
+libssl-dev
+python3-pip
+python3-dev
+python3-venv
+golang-go
+# ruby-full needed for evil-winrm and gem-based tools
+ruby-full
+
+# === Package Management ===
+# pipx for isolated Python CLI tool installs (netexec, certipy, etc.)
+pipx
+
+# === Network & VPN ===
+openvpn
+openconnect
+
+# === Web Content Discovery ===
+gobuster
+ffuf
+seclists
+
+# === Documentation & Reporting ===
+pandoc
+texlive-latex-base
+texlive-fonts-extra
+texlive-latex-extra
+texlive-fonts-recommended
+
+# === Desktop & GUI Tools ===
+gparted
+remmina
+flameshot
+terminator
+
+# === Backup ===
+borgbackup
+
+# === Security Auditing & Hardening ===
+rkhunter
+chkrootkit
+aide
+lynis

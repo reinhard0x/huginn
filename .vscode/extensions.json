@@ -1,0 +1,31 @@
+{
+    "recommendations": [
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "golang.go",
+        "ms-vscode.powershell",
+        "mads-hartmann.bash-ide-vscode",
+        "timonwong.shellcheck",
+        "foxundermoon.shell-format",
+        "yzhang.markdown-all-in-one",
+        "yzane.markdown-pdf",
+        "redhat.vscode-yaml",
+        "ms-vscode.hexeditor",
+        "humao.rest-client",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-explorer",
+        "ms-azuretools.vscode-docker",
+        "sainnhe.gruvbox-material",
+        "vscode-icons-team.vscode-icons",
+        "usernamehw.errorlens",
+        "aaron-bond.better-comments",
+        "gruntfuggly.todo-tree",
+        "oderwat.indent-rainbow",
+        "mechatroner.rainbow-csv",
+        "christian-kohler.path-intellisense",
+        "shardulm94.trailing-spaces"
+    ]
+}
