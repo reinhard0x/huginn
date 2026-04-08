@@ -237,6 +237,44 @@ function backup {
 }
 
 # ============================================================
+# FUNCTIONS — Security
+# ============================================================
+
+# VPN kill switch — locks all traffic through tun0 before connecting
+# Usage: vpn_killswitch [interface]  (default: tun0)
+function vpn_killswitch {
+    local VPN_IFACE="${1:-tun0}"
+    sudo iptables -F
+    sudo iptables -P INPUT   DROP
+    sudo iptables -P FORWARD DROP
+    sudo iptables -P OUTPUT  DROP
+    # Loopback
+    sudo iptables -A INPUT  -i lo -j ACCEPT
+    sudo iptables -A OUTPUT -o lo -j ACCEPT
+    # Established/related
+    sudo iptables -A INPUT  -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+    sudo iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+    # VPN tunnel traffic
+    sudo iptables -A INPUT  -i "$VPN_IFACE" -j ACCEPT
+    sudo iptables -A OUTPUT -o "$VPN_IFACE" -j ACCEPT
+    # Allow outbound VPN connection (UDP 1194, TCP 443/1194)
+    sudo iptables -A OUTPUT -p udp --dport 1194 -j ACCEPT
+    sudo iptables -A OUTPUT -p tcp --dport  443 -j ACCEPT
+    sudo iptables -A OUTPUT -p tcp --dport 1194 -j ACCEPT
+    echo "[+] Kill switch active — all non-VPN traffic dropped"
+    echo "[*] Connect VPN now. Run: vpn_killswitch_off to restore."
+}
+
+# Restore normal routing after VPN session
+function vpn_killswitch_off {
+    sudo iptables -F
+    sudo iptables -P INPUT   ACCEPT
+    sudo iptables -P FORWARD ACCEPT
+    sudo iptables -P OUTPUT  ACCEPT
+    echo "[+] Kill switch removed — normal routing restored"
+}
+
+# ============================================================
 # ALIASES — Navigation
 # ============================================================
 alias ..="cd .."
@@ -340,6 +378,25 @@ alias ops="cd $OPS_DIR"
 alias tools="cd $TOOLS_DIR"
 alias thm="cd $THM"
 alias project="cd $PROJECT_HOME"
+
+# ============================================================
+# ALIASES — Secure Drive (LUKS)
+# ============================================================
+alias sec-mount='sudo cryptsetup open /dev/sdb ops_secure \
+    && sudo mount /dev/mapper/ops_secure /mnt/ops-secure \
+    && sudo chown $USER:$USER /mnt/ops-secure \
+    && echo "[+] ops-secure mounted at /mnt/ops-secure"'
+alias sec-lock='sudo umount /mnt/ops-secure 2>/dev/null; \
+    sudo cryptsetup close ops_secure \
+    && echo "[+] ops-secure locked"'
+alias sec-status='sudo cryptsetup status ops_secure 2>/dev/null \
+    || echo "[-] ops-secure is not open"'
+
+# ============================================================
+# ALIASES — Session Security
+# ============================================================
+# Lock screen — tries XFCE → i3lock → xscreensaver in order
+alias lock='xflock4 2>/dev/null || i3lock -c 0D0D0D 2>/dev/null || xscreensaver-command -lock'
 
 # ============================================================
 # ALIASES — Dotfiles & Config Editing

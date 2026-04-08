@@ -187,6 +187,12 @@ install_core_packages() {
     DEBIAN_FRONTEND=noninteractive sudo apt-get install -y neo4j || \
         warn "neo4j install failed — ensure the repo was added first (run --init)."
 
+    # Wireshark non-root capture
+    if getent group wireshark &>/dev/null; then
+        sudo usermod -aG wireshark "$USER"
+        success "Added $USER to wireshark group — non-root capture enabled (re-login required)"
+    fi
+
     success "Package installation complete."
 }
 
@@ -396,6 +402,90 @@ clone_tools() {
 }
 
 # ============================================================
+# PHASE 6.5 — ADDITIONAL TOOLS (Burp Suite, Docker)
+# ============================================================
+install_burpsuite() {
+    header "Burp Suite Community Edition"
+    if command -v burpsuite &>/dev/null; then
+        success "Burp Suite already installed — skipping"
+        return 0
+    fi
+
+    info "Fetching latest Burp Suite Community installer..."
+    local BURP_URL BURP_INSTALLER
+    BURP_URL="https://portswigger.net/burp/releases/download?product=community&type=Linux"
+    BURP_INSTALLER="/tmp/burpsuite_community_linux.sh"
+
+    if ! curl -sL --max-time 120 "$BURP_URL" -o "$BURP_INSTALLER"; then
+        warn "Burp Suite download failed — skipping. Install manually from https://portswigger.net/burp"
+        return 1
+    fi
+
+    chmod +x "$BURP_INSTALLER"
+    # Silent install to /opt/BurpSuiteCommunity
+    if "$BURP_INSTALLER" -q -dir /opt/BurpSuiteCommunity 2>/dev/null; then
+        sudo ln -sf /opt/BurpSuiteCommunity/BurpSuiteCommunity /usr/local/bin/burpsuite
+        rm -f "$BURP_INSTALLER"
+        success "Burp Suite Community installed — launch with: burpsuite"
+    else
+        warn "Burp Suite installer failed. Download manually: https://portswigger.net/burp"
+        rm -f "$BURP_INSTALLER"
+    fi
+}
+
+install_docker() {
+    header "Docker"
+    if command -v docker &>/dev/null; then
+        success "Docker already installed — skipping"
+        return 0
+    fi
+
+    info "Installing Docker..."
+    # Remove legacy packages if present
+    sudo apt-get remove -y docker docker-engine docker.io containerd runc 2>/dev/null || true
+    sudo apt-get install -y docker.io docker-compose-plugin
+    sudo systemctl enable docker
+    sudo systemctl start docker
+    sudo usermod -aG docker "$USER"
+    success "Docker installed — re-login required for group membership"
+}
+
+init_metasploit() {
+    header "Metasploit Database"
+    if msfdb status 2>/dev/null | grep -q "connected"; then
+        success "Metasploit DB already initialized"
+        return 0
+    fi
+
+    info "Starting PostgreSQL and initializing Metasploit database..."
+    sudo systemctl enable postgresql
+    sudo systemctl start postgresql
+    msfdb init
+    success "Metasploit DB initialized"
+}
+
+setup_screen_lock() {
+    header "Screen Auto-Lock"
+    info "Installing xautolock + i3lock..."
+    DEBIAN_FRONTEND=noninteractive sudo apt-get install -y xautolock i3lock 2>/dev/null || \
+        warn "xautolock/i3lock install failed — screen lock not configured"
+
+    # Add xautolock to XFCE autostart (10-minute idle lock)
+    local AUTOSTART_DIR="$HOME/.config/autostart"
+    mkdir -p "$AUTOSTART_DIR"
+    cat > "$AUTOSTART_DIR/xautolock.desktop" <<'AUTOSTART'
+[Desktop Entry]
+Type=Application
+Name=xautolock
+Exec=xautolock -time 10 -locker 'i3lock -c 0D0D0D' -detectsleep
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+AUTOSTART
+    success "Screen auto-lock configured (10 min idle → i3lock black screen)"
+}
+
+# ============================================================
 # PHASE 7 — DIRECTORY STRUCTURE
 # ============================================================
 setup_directories() {
@@ -472,6 +562,15 @@ deploy_configs() {
         success "terminator_reinhard → $TERMINATOR_DEST"
     else
         warn "terminator_reinhard not found at $TERMINATOR_SRC — skipping."
+    fi
+
+    # --- Git hooks ---
+    local REPO_ROOT
+    REPO_ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel 2>/dev/null || true)"
+    if [[ -n "$REPO_ROOT" && -d "$REPO_ROOT/.githooks" ]]; then
+        git -C "$REPO_ROOT" config core.hooksPath .githooks
+        chmod +x "$REPO_ROOT/.githooks/pre-commit" 2>/dev/null || true
+        success "Git hooks configured: $REPO_ROOT/.githooks"
     fi
 }
 
@@ -628,8 +727,20 @@ verify_install() {
     echo ""
     info "── Commands ─────────────────────────────────"
     for cmd in zsh git vim curl tmux nmap gobuster ffuf ncat socat \
-               python3 pip3 pipx go ruby neo4j btop pandoc; do
+               python3 pip3 pipx go ruby neo4j btop pandoc \
+               burpsuite docker wireshark msfdb xautolock; do
         _check_cmd "$cmd"
+    done
+
+    info "── Groups ──────────────────────────────────────"
+    for grp in wireshark docker; do
+        if id -nG "$USER" 2>/dev/null | grep -qw "$grp"; then
+            success "  GROUP $grp"
+            ((pass++))
+        else
+            warn    "  GROUP $grp  ✗ $USER not in group (re-login required?)"
+            ((fail++))
+        fi
     done
 
     info "── Oh My Zsh & Powerlevel10k ─────────────────"
@@ -721,6 +832,10 @@ main() {
             setup_python_venvs
             install_pipx_tools
             clone_tools
+            install_burpsuite
+            install_docker
+            init_metasploit
+            setup_screen_lock
             deploy_configs
             run_hardening
             verify_install
@@ -728,6 +843,7 @@ main() {
             success "═══════════════════════════════════════════════════"
             success "  Huginn initial setup complete."
             success "  Next: restart terminal, then run: p10k configure"
+            success "  Note: re-login required for wireshark/docker groups"
             success "═══════════════════════════════════════════════════"
             ;;
 

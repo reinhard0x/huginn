@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+# ============================================================
+#  pre-commit — Huginn Git Hook
+#  Blocks commits containing secrets, keys, flags, or creds
+#
+#  Install: git config core.hooksPath .githooks
+#  (reinhard_setup.sh --init does this automatically)
+# ============================================================
+
+RED='\033[0;31m'; YELLOW='\033[1;33m'; GREEN='\033[0;32m'; RESET='\033[0m'
+BOLD='\033[1m'
+
+FAIL=0
+WARNINGS=()
+
+# Files staged for commit
+STAGED=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null)
+[[ -z "$STAGED" ]] && exit 0
+
+# ── Pattern definitions ───────────────────────────────────────
+declare -A PATTERNS
+PATTERNS=(
+    ["SSH Private Key"]="-----BEGIN (RSA|EC|DSA|OPENSSH) PRIVATE KEY"
+    ["AWS Access Key"]="AKIA[0-9A-Z]{16}"
+    ["AWS Secret Key"]="aws_secret_access_key\s*=\s*['\"][0-9a-zA-Z/+]{40}"
+    ["GitHub Token"]="gh[pousr]_[a-zA-Z0-9]{36,}"
+    ["Generic API Key"]="(api[_-]?key|apikey)\s*[=:]\s*['\"][a-zA-Z0-9_\-]{20,}"
+    ["Generic Secret"]="(secret|password|passwd|pwd)\s*[=:]\s*['\"][^'\"]{8,}"
+    ["HTB Flag"]="HTB\{[^}]+\}"
+    ["THM Flag"]="THM\{[^}]+\}"
+    ["CTF Flag"]="(flag|FLAG)\{[^}]+\}"
+    ["Private Key PEM"]="-----BEGIN CERTIFICATE-----"
+)
+
+# ── Scan staged files ─────────────────────────────────────────
+for file in $STAGED; do
+    # Skip binary files
+    if git diff --cached -- "$file" | grep -q $'^\+.*\x00'; then
+        continue
+    fi
+
+    # Get the staged content (not the working tree version)
+    content=$(git show ":$file" 2>/dev/null) || continue
+
+    for label in "${!PATTERNS[@]}"; do
+        pattern="${PATTERNS[$label]}"
+        if echo "$content" | grep -qE "$pattern" 2>/dev/null; then
+            WARNINGS+=("  ${RED}✗ ${label}${RESET} detected in: ${BOLD}${file}${RESET}")
+            FAIL=1
+        fi
+    done
+done
+
+# ── File type checks ──────────────────────────────────────────
+for file in $STAGED; do
+    # Block private key files by extension
+    if [[ "$file" =~ \.(pem|key|p12|pfx|ovpn)$ ]]; then
+        WARNINGS+=("  ${RED}✗ Sensitive file type${RESET}: ${BOLD}${file}${RESET} (.pem/.key/.ovpn)")
+        FAIL=1
+    fi
+
+    # Warn on large files (>5MB — might be capture files, wordlists)
+    size=$(git cat-file -s ":$file" 2>/dev/null || echo 0)
+    if [[ $size -gt 5242880 ]]; then
+        WARNINGS+=("  ${YELLOW}⚠ Large file${RESET} ($(( size / 1048576 ))MB): ${BOLD}${file}${RESET}")
+        # Don't fail on large files, just warn
+    fi
+done
+
+# ── Output results ─────────────────────────────────────────────
+if [[ ${#WARNINGS[@]} -gt 0 ]]; then
+    echo ""
+    echo -e "${BOLD}${RED}╔══════════════════════════════════════════════════╗${RESET}"
+    echo -e "${BOLD}${RED}║  COMMIT BLOCKED — Sensitive Content Detected     ║${RESET}"
+    echo -e "${BOLD}${RED}╚══════════════════════════════════════════════════╝${RESET}"
+    echo ""
+    for w in "${WARNINGS[@]}"; do
+        echo -e "$w"
+    done
+    echo ""
+fi
+
+if [[ $FAIL -eq 1 ]]; then
+    echo -e "  ${YELLOW}To bypass (only if you know what you're doing):${RESET}"
+    echo -e "  git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
+echo -e "${GREEN}[+] Pre-commit checks passed${RESET}"
+exit 0
