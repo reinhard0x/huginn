@@ -37,7 +37,7 @@ extensions=(
     ms-vscode-remote.remote-explorer
     ms-azuretools.vscode-docker
     # Theme & UI
-    sainnhe.gruvbox-material
+    Catppuccin.catppuccin-vsc
     vscode-icons-team.vscode-icons
     usernamehw.errorlens
     aaron-bond.better-comments

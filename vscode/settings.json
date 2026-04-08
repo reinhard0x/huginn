@@ -1,6 +1,6 @@
 {
     // ── Appearance ────────────────────────────────────────────
-    "workbench.colorTheme": "Gruvbox Material Dark Hard",
+    "workbench.colorTheme": "Catppuccin Mocha",
     "workbench.iconTheme": "vscode-icons",
     "workbench.tree.indent": 16,
     "workbench.startupEditor": "none",
@@ -116,7 +116,7 @@
 
     // ── Reinhard Color Overrides ──────────────────────────────
     "workbench.colorCustomizations": {
-        "[Gruvbox Material Dark Hard]": {
+        "[Catppuccin Mocha]": {
             "editor.background":                 "#0D0D0D",
             "terminal.background":               "#0D0D0D",
             "activityBar.background":            "#0D0D0D",
@@ -134,7 +134,7 @@
         }
     },
     "editor.tokenColorCustomizations": {
-        "[Gruvbox Material Dark Hard]": {
+        "[Catppuccin Mocha]": {
             "textMateRules": [
                 { "scope": ["keyword", "keyword.control"],  "settings": { "foreground": "#B08D57" } },
                 { "scope": ["string", "string.quoted"],     "settings": { "foreground": "#72BB78" } },

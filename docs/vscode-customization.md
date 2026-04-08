@@ -49,14 +49,14 @@ huginn/
 
 ## Theme
 
-### Recommended: Gruvbox Material
+### Recommended: Catppuccin Mocha
 
-**Extension**: `sainnhe.gruvbox-material`  
-**Variant**: `Gruvbox Material Dark Hard`
+**Extension**: `Catppuccin.catppuccin-vsc`  
+**Variant**: `Catppuccin Mocha`
 
-Gruvbox Material's palette — deep black backgrounds, warm gold/amber highlights, earthy greens and teals — maps almost directly onto the Reinhard color palette. It's the closest match to the Terminator profile without needing heavy customization.
+Catppuccin Mocha is the current standard for dark terminal-adjacent workflows — deep backgrounds, warm earthy pastels, and wide port coverage (Obsidian, Terminator, Firefox, etc. all have Catppuccin ports). The Reinhard color overrides below lock the background to `#0D0D0D` and apply brass/gold accents on top, so the base theme mainly contributes syntax highlighting and UI chrome.
 
-**Alternative**: `One Dark Pro` (`zhuangtongfa.material-theme`) — more mainstream, excellent syntax coverage, good fallback if Gruvbox Material feels too warm.
+**Alternative**: `Gruvbox` (`jdinhlife.gruvbox`) — the original Gruvbox palette for VSCode, still actively maintained. Use `Gruvbox Dark Hard` variant if you want to stay closer to the classic Gruvbox feel.
 
 **Icon Theme**: `vscode-icons` (`vscode-icons-team.vscode-icons`) — more comprehensive file detection than Material Icon Theme; recognizes `.zshrc`, Terminator configs, shell scripts, etc.
 
@@ -66,7 +66,7 @@ These overrides pull the editor accent closer to the Reinhard brass/gold and mat
 
 ```json
 "editor.tokenColorCustomizations": {
-    "[Gruvbox Material Dark Hard]": {
+    "[Catppuccin Mocha]": {
         "textMateRules": [
             {
                 "scope": ["keyword", "keyword.control"],
@@ -84,7 +84,7 @@ These overrides pull the editor accent closer to the Reinhard brass/gold and mat
     }
 },
 "workbench.colorCustomizations": {
-    "[Gruvbox Material Dark Hard]": {
+    "[Catppuccin Mocha]": {
         "editor.background":              "#0D0D0D",
         "terminal.background":            "#0D0D0D",
         "activityBar.background":         "#0D0D0D",
@@ -112,7 +112,7 @@ Full workspace settings file. Lives at `.vscode/settings.json` in the `huginn` r
 ```json
 {
     // ── Appearance ────────────────────────────────────────────
-    "workbench.colorTheme": "Gruvbox Material Dark Hard",
+    "workbench.colorTheme": "Catppuccin Mocha",
     "workbench.iconTheme": "vscode-icons",
     "workbench.tree.indent": 16,
     "workbench.startupEditor": "none",
@@ -293,7 +293,7 @@ Install all at once with the block in `vscode/extensions.json` (see below) or in
 ### UI & Productivity
 | Extension | ID | Purpose |
 |---|---|---|
-| **Gruvbox Material** | `sainnhe.gruvbox-material` | Primary theme |
+| **Catppuccin** | `Catppuccin.catppuccin-vsc` | Primary theme (Mocha variant) |
 | **vscode-icons** | `vscode-icons-team.vscode-icons` | Comprehensive icon set |
 | **Error Lens** | `usernamehw.errorlens` | Inline error/warning display — no more hunting the Problems panel |
 | **Better Comments** | `aaron-bond.better-comments` | Color-coded comment tags (TODO, !, ?, OPSEC) |
@@ -330,7 +330,7 @@ Place at `.vscode/extensions.json` in the repo. VSCode will prompt any cloner to
         "ms-vscode-remote.remote-ssh",
         "ms-vscode-remote.remote-explorer",
         "ms-azuretools.vscode-docker",
-        "sainnhe.gruvbox-material",
+        "Catppuccin.catppuccin-vsc",
         "vscode-icons-team.vscode-icons",
         "usernamehw.errorlens",
         "aaron-bond.better-comments",
@@ -401,7 +401,7 @@ extensions=(
     ms-vscode-remote.remote-ssh
     ms-vscode-remote.remote-explorer
     ms-azuretools.vscode-docker
-    sainnhe.gruvbox-material
+    Catppuccin.catppuccin-vsc
     vscode-icons-team.vscode-icons
     usernamehw.errorlens
     aaron-bond.better-comments
