@@ -69,3 +69,5 @@ rkhunter
 chkrootkit
 aide
 lynis
+ufw
+

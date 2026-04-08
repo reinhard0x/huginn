@@ -28,8 +28,8 @@ TOOLS_DIR="$HOME/tools"
 VENV_DIR="$HOME/.venvs"
 OPS_DIR="$HOME/ops"
 INSTALL_LIST="$SCRIPT_DIR/install_list.txt"
-ZSHRC_SRC="$SCRIPT_DIR/reinhard.zshrc"
-TERMINATOR_SRC="$SCRIPT_DIR/terminator_reinhard"
+ZSHRC_SRC="$SCRIPT_DIR/dotfiles/reinhard.zshrc"
+TERMINATOR_SRC="$SCRIPT_DIR/dotfiles/terminator_reinhard"
 TERMINATOR_DEST="$HOME/.config/terminator/config"
 
 # ============================================================
